@@ -16,15 +16,18 @@ takeScreenshot = async (date) => {
   await page.screenshot({ path: `screenshot/${date}.png` });
   await browser.close();
 };
-const now = new Date();
-var timestamp =
-  now.getFullYear() +
-  "_" +
-  now.getMonth() +
-  "_" +
-  now.getDate() +
-  "_" +
-  now.getHours() +
-  "_" +
-  now.getMinutes();
-takeScreenshot(timestamp);
+takeCurrentScreenshot = () => {
+  const now = new Date();
+  var timestamp =
+    now.getFullYear() +
+    "_" +
+    now.getMonth() +
+    "_" +
+    now.getDate() +
+    "_" +
+    now.getHours() +
+    "_" +
+    now.getMinutes();
+  takeScreenshot(timestamp);
+};
+setInterval(takeCurrentScreenshot, 1800000);
