@@ -30,4 +30,5 @@ takeCurrentScreenshot = () => {
     now.getMinutes();
   takeScreenshot(timestamp);
 };
-setInterval(takeCurrentScreenshot, 1800000);
+takeCurrentScreenshot();
+setInterval(takeCurrentScreenshot, 600000);
