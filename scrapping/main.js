@@ -19,14 +19,6 @@ takeScreenshot = async (date) => {
   await browser.close();
 };
 
-takeWeatherData = async (timestamp) => {
-  await weather(timestamp);
-};
-
-takePollutionData = async (timestamp) => {
-  await pollution(timestamp);
-};
-
 getTimestamp = () => {
   const now = new Date();
   var timestamp =
@@ -49,12 +41,12 @@ takeCurrentScreenshot = () => {
 
 takeCurrentWeatherData = () => {
   var timestamp = getTimestamp();
-  takeWeatherData(timestamp);
+  weather(timestamp);
 };
 
 takeCurrentPollutionData = () => {
   var timestamp = getTimestamp();
-  takePollutionData(timestamp);
+  pollution(timestamp);
 };
 
 takeCurrentScreenshot();
