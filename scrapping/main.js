@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const weather = require("./weather");
 
 takeScreenshot = async (date) => {
   const browser = await puppeteer.launch({
@@ -16,7 +17,12 @@ takeScreenshot = async (date) => {
   await page.screenshot({ path: `screenshot/${date}.png` });
   await browser.close();
 };
-takeCurrentScreenshot = () => {
+
+takeWeatherData = async (timestamp) => {
+  await weather(timestamp);
+};
+
+getTimestamp = () => {
   const now = new Date();
   var timestamp =
     now.getFullYear() +
@@ -28,7 +34,20 @@ takeCurrentScreenshot = () => {
     now.getHours() +
     "_" +
     now.getMinutes();
+  return timestamp;
+};
+
+takeCurrentScreenshot = () => {
+  var timestamp = getTimestamp();
   takeScreenshot(timestamp);
 };
+
+takeCurrentWeatherData = () => {
+  var timestamp = getTimestamp();
+  takeWeatherData(timestamp);
+};
+
 takeCurrentScreenshot();
 setInterval(takeCurrentScreenshot, 600000);
+takeCurrentWeatherData();
+setInterval(takeCurrentWeatherData, 3600000);
