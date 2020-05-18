@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const weather = require("./weather");
+const pollution = require("./pollution");
 
 takeScreenshot = async (date) => {
   const browser = await puppeteer.launch({
@@ -20,6 +21,10 @@ takeScreenshot = async (date) => {
 
 takeWeatherData = async (timestamp) => {
   await weather(timestamp);
+};
+
+takePollutionData = async (timestamp) => {
+  await pollution(timestamp);
 };
 
 getTimestamp = () => {
@@ -47,7 +52,14 @@ takeCurrentWeatherData = () => {
   takeWeatherData(timestamp);
 };
 
+takeCurrentPollutionData = () => {
+  var timestamp = getTimestamp();
+  takePollutionData(timestamp);
+};
+
 takeCurrentScreenshot();
 setInterval(takeCurrentScreenshot, 600000);
 takeCurrentWeatherData();
 setInterval(takeCurrentWeatherData, 3600000);
+takeCurrentPollutionData();
+setInterval(takeCurrentPollutionData, 3600000);
