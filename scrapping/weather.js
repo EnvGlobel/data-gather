@@ -12,6 +12,8 @@ points = {
   Estanzuela: "32218516",
   AlcaldiaMayor: "32275346",
   SedeNCun: "32216996",
+  SedeJCun: "32301661",
+  Cedritos: "32155981",
 };
 
 getWeatherData = async (timestamp) => {
