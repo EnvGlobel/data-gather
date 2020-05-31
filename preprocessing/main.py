@@ -9,11 +9,11 @@ def main():
     # rootPath = r"D:\ws\bk\screenshot"
     # mapParser.parseDirectory(rootPath)
 
-    weatherParser = WeatherParser(32)
-    weatherParser.parseDirectory("D:\\ws\\bk\\data\\meteogram")
+    # weatherParser = WeatherParser(32)
+    # weatherParser.parseDirectory("D:\\ws\\bk\\data\\meteogram")
 
-    # pollutionParser = PollutionParser()
-    # pollutionParser.parseDirectory("D:\\ws\\bk\\data\\pollution")
+    pollutionParser = PollutionParser(32)
+    pollutionParser.parseDirectory("D:\\ws\\bk\\data\\pollution")
 
 
 main()

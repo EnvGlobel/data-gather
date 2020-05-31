@@ -35,16 +35,14 @@ class DocumentDeserializer:
 
         return record
 
-    def getPollutionRecordFromDocument(self, document):
+    def getPollutionRecordFromDocument(self, document, timestamp):
         document = json.loads(document)
-        previousForecasts = document["data"]
-        previousForecastPM25 = previousForecasts[163]
-        previousForecastPM10 = previousForecasts[331]
-        previousForecastO3 = previousForecasts[503]
-        record = {}
-        record["date"] = previousForecastO3["fecha_inicio"]
-        record["pm25"] = previousForecastPM25["concentracion"]
-        record["pm10"] = previousForecastPM10["concentracion"]
-        record["o3"] = previousForecastO3["concentracion"]
+        previousMeasurements = document["data"]
+        record = {"date": timestamp, "O3": None, "PM25": None, "PM10": None}
+        for measurement in previousMeasurements:
+            date = measurement["fecha_inicio"]
+            if date == timestamp:
+                record[measurement["contaminante_name"]
+                       ] = measurement["concentracion"]
 
         return record

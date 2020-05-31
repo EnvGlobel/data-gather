@@ -55,3 +55,14 @@ class BogotaDataProvider:
         cnx.commit()
         cursor.close()
         cnx.close()
+
+    def savePollutionData(self, record):
+        cnx = self.pool.get_connection()
+        cursor = cnx.cursor()
+        query = ("INSERT INTO "
+                 "pollutionBogota(measureDate, station, pm25, pm10, o3)"
+                 "VALUES (%(date)s, %(station)s, %(PM25)s, %(PM10)s, %(O3)s)")
+        cursor.execute(query, record)
+        cnx.commit()
+        cursor.close()
+        cnx.close()
