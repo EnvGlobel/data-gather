@@ -22,11 +22,16 @@ class DocumentDeserializer:
                 break
         record = {}
         record["date"] = timestamp
-        record["precipitation"] = nextForecast["precipitation"]["@attributes"]["value"]
-        record["pressure"] = nextForecast["pressure"]["@attributes"]["value"]
-        record["temperature"] = nextForecast["temperature"]["@attributes"]["value"]
-        record["windDirection"] = nextForecast["windDirection"]["@attributes"]["deg"]
-        record["windSpeed"] = nextForecast["windSpeed"]["@attributes"]["mps"]
+        precipitation = nextForecast["precipitation"]["@attributes"]["value"]
+        record["precipitation"] = None if precipitation == '' else precipitation
+        pressure = nextForecast["pressure"]["@attributes"]["value"]
+        record["pressure"] = None if pressure == '' else pressure
+        temperature = nextForecast["temperature"]["@attributes"]["value"]
+        record["temperature"] = None if temperature == '' else temperature
+        windDirection = nextForecast["windDirection"]["@attributes"]["deg"]
+        record["windDirection"] = None if windDirection == '' else windDirection
+        windSpeed = nextForecast["windSpeed"]["@attributes"]["mps"]
+        record["windSpeed"] = None if windSpeed == '' else windSpeed
 
         return record
 
