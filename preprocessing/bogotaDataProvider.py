@@ -18,3 +18,11 @@ class BogotaDataProvider:
         cursor.execute(query, record)
         self.cnx.commit()
         cursor.close()
+
+    def getPollutionStationLocations(self):
+        cursor = self.cnx.cursor()
+        query = ("SELECT id, latitude, longitude FROM pollutionStationBogota")
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
