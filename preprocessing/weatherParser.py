@@ -1,6 +1,8 @@
 from bogota.documentDeserializer import DocumentDeserializer
 from bogota.bogotaDataProvider import BogotaDataProvider
 import os
+import datetime
+import math
 
 
 class WeatherParser:
@@ -19,12 +21,22 @@ class WeatherParser:
                 continue
             for file in os.listdir(dirPath):
                 filePath = os.path.join(dirPath, file)
-                document = self.documentDeserializer.readCleanDocument(
-                    filePath)
-                record = self.documentDeserializer.getRecordFromDocument(
-                    document)
-                record["station"] = stationIds[station]
-                self.dataProvider.saveWeatherData(record)
+                self.saveFileData(filePath, stationIds[station])
+
+    def saveFileData(self, filePath, station):
+        try:
+            timestamp = os.path.getmtime(filePath)
+            timestampNextHour = math.ceil(timestamp/3600) * 3600
+            measureDate = datetime.datetime.fromtimestamp(timestampNextHour
+                                                          ).isoformat()
+            document = self.documentDeserializer.readCleanDocument(
+                filePath)
+            record = self.documentDeserializer.getRecordFromDocument(
+                document, measureDate)
+            record["station"] = station
+            self.dataProvider.saveWeatherData(record)
+        except:
+            print("{0} failed".format(filePath))
 
 
 weatherParser = WeatherParser()
