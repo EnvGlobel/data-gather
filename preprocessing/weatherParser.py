@@ -11,6 +11,7 @@ class WeatherParser:
 
     def parseDirectory(self, rootPath):
         stations = os.listdir(rootPath)
+        stationIds = dict(self.dataProvider.getWeatherStationNames())
 
         for station in stations:
             dirPath = os.path.join(rootPath, station)
@@ -22,7 +23,7 @@ class WeatherParser:
                     filePath)
                 record = self.documentDeserializer.getRecordFromDocument(
                     document)
-                record["station"] = station
+                record["station"] = stationIds[station]
                 self.dataProvider.saveWeatherData(record)
 
 

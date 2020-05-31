@@ -26,3 +26,11 @@ class BogotaDataProvider:
         result = cursor.fetchall()
         cursor.close()
         return result
+
+    def getWeatherStationNames(self):
+        cursor = self.cnx.cursor()
+        query = ("SELECT name, id FROM weatherStationBogota")
+        cursor.execute(query)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
