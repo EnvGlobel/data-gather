@@ -7,6 +7,10 @@ class DocumentDeserializer:
             text = f.read().rstrip()[1:-1]
             return text.decode('unicode-escape')
 
+    def readDocument(self, path):
+        with open(path, "rb") as f:
+            return f.read()
+
     def getWeatherRecordFromDocument(self, document, timestamp):
         document = json.loads(document)
         nextForecasts = document["forecast"]["tabular"]["time"]
@@ -23,6 +27,8 @@ class DocumentDeserializer:
         record["temperature"] = nextForecast["temperature"]["@attributes"]["value"]
         record["windDirection"] = nextForecast["windDirection"]["@attributes"]["deg"]
         record["windSpeed"] = nextForecast["windSpeed"]["@attributes"]["mps"]
+
+        return record
 
     def getPollutionRecordFromDocument(self, document):
         document = json.loads(document)

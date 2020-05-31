@@ -45,8 +45,3 @@ class MapParser:
             record["date"] = measureDate
             record["pollutionStation"] = location
             self.dataProvider.saveTrafficData(record)
-
-
-mapParser = MapParser()
-rootPath = r"D:\ws\bk\screenshots\screenshot"
-mapParser.parseDirectory(rootPath)

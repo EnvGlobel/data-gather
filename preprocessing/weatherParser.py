@@ -37,7 +37,3 @@ class WeatherParser:
             self.dataProvider.saveWeatherData(record)
         except:
             print("{0} failed".format(filePath))
-
-
-weatherParser = WeatherParser()
-weatherParser.parseDirectory("D:\\ws\\bk\\meteogram")

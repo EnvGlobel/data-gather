@@ -28,7 +28,7 @@ class PollutionParser:
             # timestampNextHour = math.ceil(timestamp/3600) * 3600
             # measureDate = datetime.datetime.fromtimestamp(timestampNextHour
             #                                               ).isoformat()
-            document = self.documentDeserializer.readCleanDocument(
+            document = self.documentDeserializer.readDocument(
                 filePath)
             record = self.documentDeserializer.getPollutionRecordFromDocument(
                 document)
@@ -36,7 +36,3 @@ class PollutionParser:
             self.dataProvider.saveWeatherData(record)
         except:
             print("{0} failed".format(filePath))
-
-
-pollutionParser = PollutionParser()
-pollutionParser.parseDirectory("D:\\ws\\bk\\data\\pollution")
