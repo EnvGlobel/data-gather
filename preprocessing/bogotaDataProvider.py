@@ -1,45 +1,57 @@
 
 import mysql.connector
+from mysql.connector import Error
+from mysql.connector import pooling
 
 
 class BogotaDataProvider:
 
-    def __init__(self) -> None:
-
-        self.cnx = mysql.connector.connect(user='root', password='example',
-                                           host='34.67.137.54',
-                                           database='EnvGlobel')
+    def __init__(self, poolSize=1) -> None:
+        self.pool = mysql.connector.pooling.MySQLConnectionPool(pool_size=poolSize,
+                                                                pool_reset_session=True,
+                                                                host='34.67.137.54',
+                                                                database='EnvGlobel',
+                                                                user='root',
+                                                                password='example')
 
     def saveWeatherData(self, record):
-        cursor = self.cnx.cursor()
+        cnx = self.pool.get_connection()
+        cursor = cnx.cursor()
         query = ("INSERT INTO "
                  "weatherBogota(measureDate, station, temperature, windSpeed, windDirection, precipitation, pressure)"
                  "VALUES (%(date)s, %(station)s, %(temperature)s, %(windSpeed)s, %(windDirection)s, %(precipitation)s, %(pressure)s)")
         cursor.execute(query, record)
-        self.cnx.commit()
+        cnx.commit()
         cursor.close()
+        cnx.close()
 
     def getPollutionStationLocations(self):
-        cursor = self.cnx.cursor()
+        cnx = self.pool.get_connection()
+        cursor = cnx.cursor()
         query = ("SELECT id, latitude, longitude FROM pollutionStationBogota")
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
+        cnx.close()
         return result
 
     def getWeatherStationNames(self):
-        cursor = self.cnx.cursor()
+        cnx = self.pool.get_connection()
+        cursor = cnx.cursor()
         query = ("SELECT name, id FROM weatherStationBogota")
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
+        cnx.close()
         return result
 
     def saveTrafficData(self, record):
-        cursor = self.cnx.cursor()
+        cnx = self.pool.get_connection()
+        cursor = cnx.cursor()
         query = ("INSERT INTO "
                  "trafficBogota(measureDate, pollutionStation, green, orange, red, darkRed)"
                  "VALUES (%(date)s, %(pollutionStation)s, %(green)s, %(orange)s, %(red)s, %(darkRed)s)")
         cursor.execute(query, record)
-        self.cnx.commit()
+        cnx.commit()
         cursor.close()
+        cnx.close()
