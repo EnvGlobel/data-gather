@@ -34,3 +34,12 @@ class BogotaDataProvider:
         result = cursor.fetchall()
         cursor.close()
         return result
+
+    def saveTrafficData(self, record):
+        cursor = self.cnx.cursor()
+        query = ("INSERT INTO "
+                 "trafficBogota(measureDate, pollutionStation, green, orange, red, darkRed)"
+                 "VALUES (%(date)s, %(pollutionStation)s, %(green)s, %(orange)s, %(red)s, %(darkRed)s)")
+        cursor.execute(query, record)
+        self.cnx.commit()
+        cursor.close()
