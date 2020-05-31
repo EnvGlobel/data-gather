@@ -12,18 +12,11 @@ class DocumentDeserializer:
         nextForecast = document["forecast"]["tabular"]["time"][0]
 
         record = {}
-        record["time"] = nextForecast["@attributes"]["from"]
-        record["precipitation"] = nextForecast["precipitation"]
-        record["pressure"] = nextForecast["pressure"]
-        record["temperature"] = nextForecast["temperature"]
-        record["windDirection"] = nextForecast["windDirection"]
-        record["windSpeed"] = nextForecast["windSpeed"]
+        record["date"] = nextForecast["@attributes"]["from"]
+        record["precipitation"] = nextForecast["precipitation"]["@attributes"]["value"]
+        record["pressure"] = nextForecast["pressure"]["@attributes"]["value"]
+        record["temperature"] = nextForecast["temperature"]["@attributes"]["value"]
+        record["windDirection"] = nextForecast["windDirection"]["@attributes"]["deg"]
+        record["windSpeed"] = nextForecast["windSpeed"]["@attributes"]["mps"]
 
         return record
-
-
-path = "D:\\ws\\bk\\meteogram\\AlcaldiaMayor\\2020_4_17_23_49.json"
-
-documentDeserializer = DocumentDeserializer()
-document = documentDeserializer.readCleanDocument(path)
-documentDeserializer.getRecordFromDocument(document)
