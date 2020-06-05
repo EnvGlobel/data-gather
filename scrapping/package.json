@@ -1,0 +1,17 @@
+{
+  "name": "maps-query",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "main.js",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "puppeteer": "^3.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesus Angel",
+  "license": "ISC"
+}
