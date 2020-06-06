@@ -17,5 +17,6 @@ def main(rootDirectory: str):
     pollutionParser.parseDirectory(os.path.join(rootDirectory, "pollution"))
 
 
-rootDirectory = "D:\\ws\\bk\\data"
-main(rootDirectory)
+if __name__ == "__main__":
+    rootDirectory = "D:\\ws\\bk\\data"
+    main(rootDirectory)
