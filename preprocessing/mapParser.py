@@ -1,6 +1,6 @@
-from bogota.mapProcessing import MapFeatureExtractor
-from bogota.bogotaDataProvider import BogotaDataProvider
-from bogota.coordinate_converter import convertToPixels
+from .mapProcessing import MapFeatureExtractor
+from .dataProvider import DataProvider
+from .coordinate_converter import convertToPixels
 from skimage import io
 import os
 import datetime
@@ -11,7 +11,7 @@ IMAGE_RADIUS = 100
 class MapParser:
 
     def __init__(self) -> None:
-        self.dataProvider = BogotaDataProvider()
+        self.dataProvider = DataProvider()
         self.mapFeatureExtractor = MapFeatureExtractor()
         locations = self.dataProvider.getPollutionStationLocations()
         self.pixelLocations = dict(map(self.getPixelLocation, locations))

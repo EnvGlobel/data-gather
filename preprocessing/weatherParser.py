@@ -1,5 +1,5 @@
-from bogota.documentDeserializer import DocumentDeserializer
-from bogota.bogotaDataProvider import BogotaDataProvider
+from .documentDeserializer import DocumentDeserializer
+from .dataProvider import DataProvider
 import os
 import datetime
 import math
@@ -11,7 +11,7 @@ class WeatherParser:
     def __init__(self, maxWorkers=1) -> None:
         self.maxWorkers = maxWorkers
         self.documentDeserializer = DocumentDeserializer()
-        self.dataProvider = BogotaDataProvider(self.maxWorkers)
+        self.dataProvider = DataProvider(self.maxWorkers)
 
     def parseDirectory(self, rootPath):
         stations = os.listdir(rootPath)

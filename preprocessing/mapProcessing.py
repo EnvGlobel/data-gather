@@ -1,7 +1,4 @@
-from skimage import io
 import numpy as np
-from skimage.util import img_as_uint
-from PIL import Image
 
 COLOR_GREEN = 6542952
 COLOR_ORANGE = 16750413

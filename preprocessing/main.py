@@ -1,19 +1,21 @@
-from bogota.mapParser import MapParser
-from bogota.weatherParser import WeatherParser
-from bogota.pollutionParser import PollutionParser
+from .mapParser import MapParser
+from .weatherParser import WeatherParser
+from .pollutionParser import PollutionParser
+
+import os
 
 
-def main():
+def main(rootDirectory: str):
 
-    # mapParser = MapParser()
-    # rootPath = r"D:\ws\bk\screenshot"
-    # mapParser.parseDirectory(rootPath)
+    mapParser = MapParser()
+    mapParser.parseDirectory(os.path.join(rootDirectory, "screenshot"))
 
-    # weatherParser = WeatherParser(32)
-    # weatherParser.parseDirectory("D:\\ws\\bk\\data\\meteogram")
+    weatherParser = WeatherParser(32)
+    weatherParser.parseDirectory(os.path.join(rootDirectory, "meteogram"))
 
     pollutionParser = PollutionParser(32)
-    pollutionParser.parseDirectory("D:\\ws\\bk\\data\\pollution")
+    pollutionParser.parseDirectory(os.path.join(rootDirectory, "pollution"))
 
 
-main()
+rootDirectory = "D:\\ws\\bk\\data"
+main(rootDirectory)

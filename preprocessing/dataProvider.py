@@ -4,13 +4,13 @@ from mysql.connector import Error
 from mysql.connector import pooling
 
 
-class BogotaDataProvider:
+class DataProvider:
 
     def __init__(self, poolSize=1) -> None:
         self.pool = mysql.connector.pooling.MySQLConnectionPool(pool_size=poolSize,
                                                                 pool_reset_session=True,
                                                                 host='34.67.137.54',
-                                                                database='EnvGlobel',
+                                                                database='maps',
                                                                 user='root',
                                                                 password='example')
 
@@ -18,7 +18,7 @@ class BogotaDataProvider:
         cnx = self.pool.get_connection()
         cursor = cnx.cursor()
         query = ("INSERT INTO "
-                 "weatherBogota(measureDate, station, temperature, windSpeed, windDirection, precipitation, pressure)"
+                 "weather(measureDate, station, temperature, windSpeed, windDirection, precipitation, pressure)"
                  "VALUES (%(date)s, %(station)s, %(temperature)s, %(windSpeed)s, %(windDirection)s, %(precipitation)s, %(pressure)s)")
         cursor.execute(query, record)
         cnx.commit()
@@ -28,7 +28,7 @@ class BogotaDataProvider:
     def getPollutionStationLocations(self):
         cnx = self.pool.get_connection()
         cursor = cnx.cursor()
-        query = ("SELECT id, latitude, longitude FROM pollutionStationBogota")
+        query = ("SELECT id, latitude, longitude FROM pollutionStation")
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
@@ -38,7 +38,7 @@ class BogotaDataProvider:
     def getWeatherStationNames(self):
         cnx = self.pool.get_connection()
         cursor = cnx.cursor()
-        query = ("SELECT name, id FROM weatherStationBogota")
+        query = ("SELECT name, id FROM weatherStation")
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
@@ -49,7 +49,7 @@ class BogotaDataProvider:
         cnx = self.pool.get_connection()
         cursor = cnx.cursor()
         query = ("INSERT INTO "
-                 "trafficBogota(measureDate, pollutionStation, green, orange, red, darkRed)"
+                 "traffic(measureDate, pollutionStation, green, orange, red, darkRed)"
                  "VALUES (%(date)s, %(pollutionStation)s, %(green)s, %(orange)s, %(red)s, %(darkRed)s)")
         cursor.execute(query, record)
         cnx.commit()
@@ -60,7 +60,7 @@ class BogotaDataProvider:
         cnx = self.pool.get_connection()
         cursor = cnx.cursor()
         query = ("INSERT INTO "
-                 "pollutionBogota(measureDate, station, pm25, pm10, o3)"
+                 "pollution(measureDate, station, pm25, pm10, o3)"
                  "VALUES (%(date)s, %(station)s, %(PM25)s, %(PM10)s, %(O3)s)")
         cursor.execute(query, record)
         cnx.commit()
