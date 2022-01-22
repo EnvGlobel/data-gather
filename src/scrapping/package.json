@@ -4,7 +4,7 @@
   "description": "none",
   "main": "main.js",
   "dependencies": {
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "puppeteer": "^3.0.4"
   },
   "devDependencies": {},
